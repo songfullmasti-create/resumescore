@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeScore — Check Your Resume Before You Apply</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;color:#172033;background:#f7f9fc;line-height:1.5}
+nav{max-width:1100px;margin:auto;padding:22px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:800}.logo span{color:#5b5bf7}
+nav a{color:#172033;text-decoration:none;margin-left:22px;font-size:14px}
+.btn{display:inline-block;background:#5b5bf7;color:white!important;padding:12px 19px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+.hero{max-width:1100px;margin:45px auto 25px;padding:30px 20px;text-align:center}
+.badge{display:inline-block;background:#ececff;color:#4d4ddd;padding:7px 13px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.05;max-width:800px;margin:auto}
+.hero p{max-width:650px;margin:20px auto;color:#647084;font-size:18px}
+.card{max-width:900px;margin:30px auto 70px;background:white;padding:28px;border-radius:18px;box-shadow:0 12px 40px rgba(24,35,60,.09)}
+.upload{border:2px dashed #cbd1df;border-radius:14px;padding:35px;text-align:center;margin-bottom:18px}
+.upload input{display:none}.upload label{cursor:pointer;color:#5555e8;font-weight:700}
+textarea{width:100%;min-height:130px;border:1px solid #d9deea;border-radius:12px;padding:15px;font:inherit;resize:vertical}
+.analyze{width:100%;margin-top:16px;font-size:16px}
+.result{display:none;margin-top:25px;border-top:1px solid #edf0f5;padding-top:25px}
+.score{font-size:48px;font-weight:800;color:#4d4ddd}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.box{background:#f7f8fc;padding:18px;border-radius:12px}.box b{display:block;margin-bottom:7px}
+section{max-width:1100px;margin:0 auto 70px;padding:0 20px}
+.section-title{text-align:center;font-size:32px;margin-bottom:25px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{background:white;padding:25px;border-radius:15px}.feature h3{margin:10px 0 6px}.feature p{color:#697487}
+.price{text-align:center;background:#171d31;color:white;padding:45px 20px;border-radius:20px}
+.price p{color:#cbd1df;margin:10px 0 20px}
+footer{text-align:center;padding:30px;color:#7b8495;font-size:13px}
+@media(max-width:700px){.features,.grid{grid-template-columns:1fr}nav a:not(.btn){display:none}.card{margin-left:15px;margin-right:15px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Resume<span>Score</span></div>
+  <div><a href="#features">Features</a><a href="#pricing">Pricing</a><a class="btn" href="#checker">Try Free</a></div>
+</nav>
+
+<header class="hero">
+  <div class="badge">AI-powered resume analysis</div>
+  <h1>Check Your Resume Before You Apply.</h1>
+  <p>Find missing skills, improve your keywords and see how closely your resume matches the job description.</p>
+  <a class="btn" href="#checker">Check My Resume — Free</a>
+</header>
+
+<div class="card" id="checker">
+  <div class="upload">
+    <label for="resume">📄 Upload your resume (PDF/DOCX)</label>
+    <input id="resume" type="file" accept=".pdf,.doc,.docx">
+    <div id="filename" style="margin-top:8px;color:#697487;font-size:14px">No file selected</div>
+  </div>
+  <textarea id="job" placeholder="Paste the job description here..."></textarea>
+  <button class="btn analyze" onclick="analyze()">Analyze My Resume</button>
+
+  <div class="result" id="result">
+    <div>Your estimated ATS match score</div>
+    <div class="score">82/100</div>
+    <div class="grid">
+      <div class="box"><b>✓ Strong keywords</b>Electrical design, AutoCAD, testing</div>
+      <div class="box"><b>⚠ Missing keywords</b>PLC, SCADA, preventive maintenance</div>
+      <div class="box"><b>💡 Quick improvement</b>Add measurable project results and relevant tools.</div>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <h2 class="section-title">Everything you need to apply smarter</h2>
+  <div class="features">
+    <div class="feature"><div>🎯</div><h3>ATS Score</h3><p>See how well your resume matches the job.</p></div>
+    <div class="feature"><div>🔎</div><h3>Missing Skills</h3><p>Discover important skills and keywords you may be missing.</p></div>
+    <div class="feature"><div>✍️</div><h3>AI Suggestions</h3><p>Get practical suggestions to make your resume stronger.</p></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="price">
+    <h2>Start for free</h2>
+    <p>Analyze your first resume at no cost. Upgrade when you need deeper optimization.</p>
+    <a class="btn" href="#checker">Analyze My Resume</a>
+  </div>
+</section>
+
+<footer>© 2026 ResumeScore. Built to help job seekers apply with confidence.</footer>
+
+<script>
+document.getElementById('resume').addEventListener('change', function(){
+  document.getElementById('filename').textContent = this.files[0] ? this.files[0].name : 'No file selected';
+});
+function analyze(){
+  const job=document.getElementById('job').value.trim();
+  if(!document.getElementById('resume').files.length){alert('Please upload your resume first.');return}
+  if(!job){alert('Please paste the job description.');return}
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
